@@ -17,26 +17,35 @@ int num = 0;
 
 int main()
 {
-    int choice;
-    cout << "\n\n--------------------------------------------------------------------" << endl;
-    cout << "               Training Schedule Management System                  " << endl;
-    cout << "--------------------------------------------------------------------" << endl;
-    cout << "\n\n\t\tWelcome To Home Page" << endl;
-    cout << "\n\t\tPress 1 --> Admin Login" << endl;
-    cout << "\t\tPress 2 --> Faculty Login" << endl;
-    cout << "\t\tPress 3 --> Exit" << endl;
-    cout << "\nPlease Enter Your Choice : ";
-    cin >> choice;
-
-    if (cin.fail())
+    bool repeat{ true };
+    const string prompt
     {
-        cin.clear();
-        cin.ignore(512, '\n');
-        cout << "\nPlease enter a number!!" << endl;
-        main();
-    }
-    else
+        "\n"
+        "\n--------------------------------------------------------------------"
+        "\n               Training Schedule Management System                  "
+        "\n--------------------------------------------------------------------"
+            "\n\n\n\t\tWelcome To Home Page"
+                "\n\n\t\tPress 1 --> Admin Login"
+                "\n\t\tPress 2 --> Faculty Login"
+                "\n\t\tPress 3 --> Exit "
+        "\n\nPlease Enter Your Choice : "
+    };
+    
+    while(repeat)
     {
+        int choice;
+        cout << prompt;
+        cin >> choice;
+    
+        while (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(512, '\n');
+            cout << "\nPlease enter a number!!" << endl;
+            cout << prompt;
+            cin >> choice;
+        }
+        
         switch (choice)
         {
         case 1:
@@ -50,8 +59,11 @@ int main()
             break;
         default:
             cout << "\nPlease select from the options given above" << endl;
-            main();
+            repeat = true;
+            continue; //Repeat loop.
         }
+
+        repeat = false;
     }
 }
 

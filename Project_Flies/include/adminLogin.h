@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 #include <string>
 #include <vector>
 #include <sstream>
@@ -202,7 +202,7 @@ public:
             createSchedule();
         }
 
-        ofstream f1("/Users/KI20449224/Downloads/Project_Flies/data/schedule.csv", ios::app);
+        ofstream f1("./../data/schedule.csv", ios::app);
 
         f1 << batchID << " " << technology << " " << startDate << " " << endDate << " " << nod << " " << venueDetail << " " << nop << " " << month << endl;
 
@@ -228,7 +228,7 @@ public:
     {
         fstream file;
 
-        file.open("/Users/KI20449224/Downloads/Project_Flies/data/schedule.csv", ios::in);
+        file.open("./../data/schedule.csv", ios::in);
         int count = 0;
         vector<string> v;
 
@@ -240,7 +240,7 @@ public:
         }
         file.close();
 
-        file.open("/Users/KI20449224/Downloads/Project_Flies/data/schedule.csv", ios::in);
+        file.open("./../data/schedule.csv", ios::in);
         for (int i = 0; i < count; i++)
         {
             getline(file, details);
@@ -307,7 +307,7 @@ public:
             adminModules();
         }
 
-        file.open("/Users/KI20449224/Downloads/Project_Flies/data/schedule.csv", ios::out | ios::trunc);
+        file.open("./../data/schedule.csv", ios::out | ios::trunc);
 
         int z = 0;
         while (z < v.size())
@@ -353,13 +353,13 @@ public:
             allotTrainer();
         }
 
-        ifstream f2("/Users/KI20449224/Downloads/Project_Flies/data/schedule.csv");
+        ifstream f2("./../data/schedule.csv");
         while (f2 >> batchID >> technology >> startDate >> endDate >> nod >> venueDetail >> nop >> month)
         {
             transform(technology.begin(), technology.end(), technology.begin(), ::tolower);
             transform(techName.begin(), techName.end(), techName.begin(), ::tolower);
 
-            ofstream f3("/Users/KI20449224/Downloads/Project_Flies/data/trainerallotment.csv", ios::app);
+            ofstream f3("./../data/trainerallotment.csv", ios::app);
             if (technology == techName)
             {
                 flag = 1;
@@ -405,7 +405,7 @@ public:
             generateReport();
         }
 
-        ifstream f3("/Users/KI20449224/Downloads/Project_Flies/data/schedule.csv");
+        ifstream f3("./../data/schedule.csv");
         while (f3 >> batchID >> technology >> startDate >> endDate >> nod >> venueDetail >> nop >> month)
         {
             transform(month.begin(), month.end(), month.begin(), ::tolower);

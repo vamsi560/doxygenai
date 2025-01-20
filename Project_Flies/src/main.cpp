@@ -1,9 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
-#include <stdlib.h>
-#include "/Users/KI20449224/Downloads/Project_Flies/include/adminLogin.h"
-#include "/Users/KI20449224/Downloads/Project_Flies/include/facultyLogin.h"
+#include <string>
+#include <cstdlib>
+#include <algorithm> // std::transform
+#include "adminLogin.h"
+#include "facultyLogin.h"
 
 void adminLogin();
 void facultyLogin();
@@ -112,7 +113,7 @@ void facultyLogin()         //UTC-007 & AA-001
     cout << "\nEnter Your Technology Name : ";
     cin >> techName;
 
-    ifstream input("/Users/KI20449224/Downloads/Project_Flies/data/facultyLogin.csv");
+    ifstream input("./../data/facultyLogin.csv");
 
     while (input >> id >> pass >> stream)
     {

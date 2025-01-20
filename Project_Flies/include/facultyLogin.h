@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
+#include <string>
 
 using namespace std;
 string status;
@@ -34,7 +34,7 @@ public:
             viewSchedule();
         }
 
-        ifstream f1("/Users/KI20449224/Downloads/Project_Flies/data/trainerallotment.csv");
+        ifstream f1("./../data/trainerallotment.csv");
         while (f1 >> batchID >> technology >> startDate >> endDate >> nod >> venueDetail >> nop >> month >> facultyName)
         {
             transform(facultyName.begin(), facultyName.end(), facultyName.begin(), ::tolower);

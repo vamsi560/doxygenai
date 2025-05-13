@@ -8,10 +8,9 @@ import google.generativeai as genai
 from azure.storage.blob import BlobServiceClient
 
 # === Configurations ===
-GEMINI_API_KEY = ${{ secrets.GEMINI_API_KEY }}
-AZURE_CONN_STRING = ${{ secrets.AZURE_CONN_STRING }}
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+AZURE_CONN_STRING = os.getenv('AZURE_CONN_STRING')
 AZURE_CONTAINER_NAME = "doxygen-html"
-
 OUTPUT_FOLDER = "outputs"
 DOC_FOLDER = os.path.join(OUTPUT_FOLDER, "html")
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)

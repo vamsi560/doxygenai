@@ -11,7 +11,7 @@ from azure.storage.blob import BlobServiceClient
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 AZURE_CONN_STRING = os.getenv('AZURE_CONN_STRING')
 AZURE_CONTAINER_NAME = "doxygen-html"
-OUTPUT_FOLDER = "outputs"
+OUTPUT_FOLDER = "docs"  # instead of "outputs"
 DOC_FOLDER = os.path.join(OUTPUT_FOLDER, "html")
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
@@ -45,8 +45,6 @@ def generate_docs(repo_path):
         shutil.copytree(repo_path, source_path, dirs_exist_ok=True)
 
         html_output_dir = os.path.join(OUTPUT_FOLDER, "html")
-        if os.path.exists(html_output_dir):
-            shutil.rmtree(html_output_dir)
 
         doxyfile_path = os.path.join(work_dir, "Doxyfile")
         doxy_content = f"""

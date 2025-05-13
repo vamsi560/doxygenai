@@ -11,9 +11,14 @@ from azure.storage.blob import BlobServiceClient
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 AZURE_CONN_STRING = os.getenv('AZURE_CONN_STRING')
 AZURE_CONTAINER_NAME = "doxygen-html"
+
 OUTPUT_FOLDER = "outputs"
 DOC_FOLDER = os.path.join(OUTPUT_FOLDER, "html")
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+
+# Check if API keys are available
+if not GEMINI_API_KEY or not AZURE_CONN_STRING:
+    raise EnvironmentError("GEMINI_API_KEY or AZURE_CONN_STRING environment variable not set!")
 
 # === Configure Gemini ===
 genai.configure(api_key=GEMINI_API_KEY)
@@ -39,7 +44,7 @@ azure_helper = AzureHelper(AZURE_CONN_STRING, AZURE_CONTAINER_NAME)
 # === Main Function ===
 def generate_docs(repo_path):
     print("\n📁 Cloning repository and preparing source...")
-
+    
     with tempfile.TemporaryDirectory() as work_dir:
         source_path = os.path.join(work_dir, "source")
         shutil.copytree(repo_path, source_path, dirs_exist_ok=True)
@@ -56,7 +61,6 @@ INPUT = {source_path}
 RECURSIVE = YES
 
 HAVE_DOT = YES
-DOT_PATH = /usr/local/bin/dot  # Specify the correct path for dot if necessary
 CLASS_DIAGRAMS = YES
 CALL_GRAPH = YES
 CALLER_GRAPH = YES
@@ -67,7 +71,6 @@ GRAPHICAL_HIERARCHY = YES
 DOT_IMAGE_FORMAT = svg
 INTERACTIVE_SVG = YES
 GENERATE_HTML = YES
-EXTRACT_ALL = YES
 """
 
         with open(doxyfile_path, "w", encoding="utf-8") as f:

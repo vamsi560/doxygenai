@@ -9,7 +9,10 @@ on:
 jobs:
   generate-docs:
     runs-on: ubuntu-latest
-  
+    
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      AZURE_CONN_STRING: ${{ secrets.AZURE_CONN_STRING }}  
 
     steps:
       - name: Checkout code
@@ -22,12 +25,6 @@ jobs:
         with:
           python-version: '3.11'
           
-      - name: Set environment variables
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          AZURE_CONN_STRING: ${{ secrets.AZURE_CONN_STRING }}
-        run: |
-          echo "Environment variables set for Gemini API and Azure"
 
       - name: Install Dependencies
         run: |

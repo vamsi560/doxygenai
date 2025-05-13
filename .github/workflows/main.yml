@@ -23,6 +23,10 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
+    - name: Install Graphviz
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y graphviz  # Install Graphviz for generating graphs
 
     - name: 🔧 Install Dependencies
       run: |

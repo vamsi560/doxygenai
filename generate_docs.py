@@ -10,14 +10,16 @@ OUTPUT_DIR = "outputs"
 SUMMARY_MD = "AUTODOCS_SUMMARY.md"
 DOT_SVG_DIR = os.path.join(OUTPUT_DIR, "xml")
 IMG_DIR = os.path.join("docs", "images")
+HTML_DEST = os.path.join("docs", "html")
 
 configure(api_key=os.environ["GEMINI_API_KEY"])
 model = GenerativeModel("gemini-2.0-flash")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs(IMG_DIR, exist_ok=True)
+os.makedirs(HTML_DEST, exist_ok=True)
 
-# === Step 1: Run Doxygen with XML ===
+# === Step 1: Run Doxygen with HTML + XML ===
 doxyfile = f"""
 PROJECT_NAME = AutoDocs
 OUTPUT_DIRECTORY = {OUTPUT_DIR}
@@ -25,13 +27,13 @@ INPUT = {SRC_DIR}
 RECURSIVE = YES
 HAVE_DOT = YES
 GENERATE_XML = YES
+GENERATE_HTML = YES
 CALL_GRAPH = YES
 CALLER_GRAPH = YES
 CLASS_DIAGRAMS = YES
 INCLUDE_GRAPH = YES
 INCLUDED_BY_GRAPH = YES
 GRAPHICAL_HIERARCHY = YES
-GENERATE_HTML = NO
 """
 
 with open("Doxyfile", "w") as f:
@@ -76,7 +78,12 @@ prompt = (
 )
 response = model.generate_content(prompt)
 
-# === Step 5: Write to .md ===
+# === Step 5: Copy HTML output to docs/html ===
+html_src = os.path.join(OUTPUT_DIR, "html")
+if os.path.exists(html_src):
+    subprocess.run(["cp", "-r", html_src + "/.", HTML_DEST])
+
+# === Step 6: Write to .md ===
 with open(SUMMARY_MD, "w", encoding="utf-8") as f:
     f.write("# ✨ AutoDocs Summary\n\n")
     f.write(response.text + "\n")
@@ -85,4 +92,4 @@ with open(SUMMARY_MD, "w", encoding="utf-8") as f:
         if png.endswith(".png"):
             f.write(f"![{png}](docs/images/{png})\n")
 
-print("✅ AUTODOCS_SUMMARY.md generated with graphs and AI insights.")
+print("\u2705 AUTODOCS_SUMMARY.md and HTML docs generated.")

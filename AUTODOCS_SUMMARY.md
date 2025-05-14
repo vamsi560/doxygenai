@@ -1,124 +1,89 @@
 # ✨ AutoDocs Summary
 
-Okay, I need the list of C++ and Python classes to analyze them. You've provided the structure for my response, but not the list of classes itself.  Please provide the list of C++ and Python classes (and potentially their functions/methods) so I can complete the analysis.
+Okay, I need the list of C++/Python classes and functions to analyze them.  You've provided the prompt and the format you want the response in, but the crucial information – the list of classes – is missing.
 
-Once you provide that, I will generate a Markdown summary like this:
+**Please provide the list of classes and, ideally, a brief description of what each class/function is intended to do.  The more information you give me, the more accurate and helpful the analysis will be.**
 
-```markdown
-## Analysis of C++/Python Classes
+Assuming you provide the list, here's the format I'll use and the kind of analysis I'll perform:
 
-**Please replace the bracketed sections below with actual data.**
+**Example Scenario (Replace with your actual list):**
 
-### 1. Top 5 Important Classes/Functions
+Let's imagine you provided the following list:
 
-Based on the available information, the following classes/functions appear most important.  The rationale for their importance is provided:
-
-1.  `[Class/Function Name]`: [Brief description of what it does].  Importance: [Reason - e.g., core functionality, widely used, critical path, etc.]
-2.  `[Class/Function Name]`: [Brief description of what it does].  Importance: [Reason - e.g., handles input/output, key algorithm, central data structure, etc.]
-3.  `[Class/Function Name]`: [Brief description of what it does].  Importance: [Reason - e.g., manages resources, essential configuration, event handling, etc.]
-4.  `[Class/Function Name]`: [Brief description of what it does]. Importance: [Reason - e.g., interface with external systems, high performance computation, complex logic, etc.]
-5.  `[Class/Function Name]`: [Brief description of what it does]. Importance: [Reason - e.g., user-facing API, key abstraction, error handling, etc.]
-
-*Note: This list is based on limited information and might change with more context.*
-
-### 2. Missing Documentation
-
-The following classes/functions appear to lack sufficient documentation (or any at all):
-
-*   `[Class/Function Name]`:  [Specific area lacking docs - e.g., purpose, parameters, return values, exceptions, usage examples, etc.]
-*   `[Class/Function Name]`:  [Specific area lacking docs]
-*   `[Class/Function Name]`:  [Specific area lacking docs]
-*   [And so on...]
-
-*Note:  It's assumed that any lack of docstrings/comments is considered missing documentation.*
-
-### 3. Improvements
-
-Based on the limited information provided, here are some potential areas for improvement:
-
-*   **[Specific Class/Function]**: [Suggested improvement - e.g., Refactor for better readability, add unit tests, improve error handling, optimize for performance, add assertions, etc.]  Rationale: [Reason for the suggestion - e.g., code is complex, lacks robustness, slow execution, unclear logic, etc.]
-*   **[Specific Class/Function]**: [Suggested improvement] Rationale: [Reason for the suggestion]
-*   **General**:  [General improvements - e.g., Enforce coding standards, add more comprehensive unit tests, use a consistent error handling mechanism, improve the build process, etc.]
-*   [And so on...]
-
-*Note:  These are suggestions and may require further investigation to determine their feasibility and impact.*
 ```
-
-**Example with sample classes (replace the `[]` with these to run):**
-
-```python
 Classes:
-    class Animal:
-        def __init__(self, name, species):
-            self.name = name
-            self.species = species
+[C++] Image
+[C++] ImageProcessing
+[C++] Filter_Gaussian
+[C++] Filter_Median
+[C++] Filter_Blur
+[Python] DataAnalysis
+[Python] ReportGenerator
+[Python] UserInterface
+[Python] DatabaseConnector
+[Python] Logger
 
-        def make_sound(self):
-            """Makes a generic animal sound."""
-            print("Generic animal sound")
-
-    class Dog(Animal):
-        def __init__(self, name, breed):
-            super().__init__(name, species="Dog")
-            self.breed = breed
-
-        def make_sound(self):
-            """Makes a woof sound."""
-            print("Woof!")
-
-        def fetch(self, item):
-            print(f"{self.name} fetches the {item}!")
-
-    class Cat(Animal):
-        def __init__(self, name, color):
-            super().__init__(name, species="Cat")
-            self.color = color
-
-        def make_sound(self):
-            print("Meow!")
-
-    def add(a, b):
-        """Adds two numbers."""
-        return a + b
+Functions:
+[C++] Image::loadFromFile(string filename)
+[C++] Image::saveToFile(string filename)
+[C++] ImageProcessing::applyFilter(Image& image, Filter& filter)
+[Python] DataAnalysis::calculateMean(list<float> data)
+[Python] DataAnalysis::calculateStandardDeviation(list<float> data)
+[Python] ReportGenerator::generatePDFReport(dict data)
+[Python] UserInterface::displayImage(Image image)
+[Python] DatabaseConnector::connect(string connectionString)
+[Python] Logger::log(string message)
 ```
 
-**Output after processing the example:**
+**Then, here's how I'd generate the Markdown summary:**
 
 ```markdown
-## Analysis of C++/Python Classes
+## Code Analysis Summary
 
-**Please replace the bracketed sections below with actual data.**
+This summary analyzes a set of C++ and Python classes and functions.
 
-### 1. Top 5 Important Classes/Functions
+**1. Top 5 Important Classes/Functions**
 
-Based on the available information, the following classes/functions appear most important.  The rationale for their importance is provided:
+Based on the provided list (and assuming a general image processing/data analysis context), here are the top 5 most important:
 
-1.  `Animal`: The base class for all animals. Importance: Provides a common interface and structure for different animal types.  It's the fundamental abstraction.
-2.  `Dog`: A subclass of Animal representing dogs. Importance: Demonstrates inheritance and specialized behavior (different `make_sound`). Represents a common concrete type.
-3.  `Cat`: A subclass of Animal representing cats. Importance: Demonstrates inheritance and specialized behavior.  Represents another common concrete type.
-4.  `Animal.make_sound`:  A method to make an animal sound. Importance: Key method of animal behaviour, it is overriden in subclasses and showcases polymorphism.
-5.  `add`: Adds two numbers. Importance: A simple example of a utility function.
+*   **`Image` (C++)**: Represents the core data structure for images. Essential for all image operations.
+*   **`Image::loadFromFile(string filename)` (C++)**: Enables reading image data from disk, the primary entry point for processing.
+*   **`Image::saveToFile(string filename)` (C++)**: Enables saving processed image data to disk, an important output operation.
+*   **`DataAnalysis` (Python)**: Central class for performing data analysis, likely the core logic for deriving insights.
+*   **`ReportGenerator::generatePDFReport(dict data)` (Python)**: Crucial for presenting the results of data analysis in a readable format.
 
-*Note: This list is based on limited information and might change with more context.*
+**Rationale for Selection:** These choices reflect the core functionalities of image manipulation (loading, saving, representation) and data analysis (processing and presentation of results).
 
-### 2. Missing Documentation
+**2. Missing Documentation**
 
-The following classes/functions appear to lack sufficient documentation (or any at all):
+Based on the class/function names, potential areas lacking documentation include:
 
-*   `Dog.fetch`: Missing documentation on its purpose, parameters, and return value.  What types of items can a dog fetch? What happens if the fetch fails?
+*   **`ImageProcessing` (C++)**:  Needs documentation explaining which filtering algorithms are supported, how they're implemented, and any parameter options.  Specifically, the relationship between `ImageProcessing` and individual `Filter` classes is unclear.
+*   **Individual `Filter` Classes (C++)**: Each filter (`Filter_Gaussian`, `Filter_Median`, `Filter_Blur`) should have detailed documentation on its mathematical implementation, performance characteristics, and suggested use cases.  Are these base classes or concrete implementations?
+*   **`DataAnalysis` (Python)**: While methods exist for calculating mean and std. dev., the scope of `DataAnalysis` might be broader. Documentation should clarify the purpose of this class. Is it specific to certain types of data?  Error handling for invalid input?
+*   **Error Handling**:  It's not clear how any of these classes handle errors (e.g., invalid file formats, database connection failures, malformed data).
+*   **Return Values**: Documentation should specify the return values of each function, including error codes or exceptions thrown.
 
-*Note:  It's assumed that any lack of docstrings/comments is considered missing documentation.*
+**3. Improvements**
 
-### 3. Improvements
-
-Based on the limited information provided, here are some potential areas for improvement:
-
-*   **`Animal.make_sound`**: Consider raising a `NotImplementedError` in the base class. Rationale: Forces subclasses to implement their own `make_sound` method and prevents generic sound from being printed when it shouldn't.
-*   **General**: Add type hints to functions and methods.  Rationale: Improves readability and helps with static analysis.
-*   **General**: Add unit tests to verify the behavior of the classes and functions. Rationale: Improves code reliability and helps prevent regressions.
-
-*Note:  These are suggestions and may require further investigation to determine their feasibility and impact.*
+*   **C++: Abstract Filter Class**:  Consider creating an abstract base class `Filter` with a virtual `apply` method. Then, `Filter_Gaussian`, `Filter_Median`, and `Filter_Blur` would inherit from `Filter`. This promotes polymorphism and makes adding new filters easier.
+*   **C++: Smart Pointers**: Use smart pointers (e.g., `std::unique_ptr`, `std::shared_ptr`) to manage memory for `Image` and potentially `Filter` objects to prevent memory leaks.
+*   **Python: Type Hints**: Add type hints to Python functions and classes to improve readability and maintainability.  Use `typing` module for complex types.
+*   **Python: Exception Handling**: Implement proper exception handling in the Python code (e.g., `try...except` blocks for database connections, file operations, and invalid data).
+*   **Python: Data Validation**:  Add data validation to the `DataAnalysis` and `ReportGenerator` classes to ensure data is in the expected format and range.
+*   **Python: Logger Configuration:** The `Logger` class likely needs configuration for log levels, output destinations (file, console), and formatting.
+*   **General: Unit Tests**:  Implement unit tests for all classes and functions to ensure they function correctly and to facilitate regression testing during development.
 ```
-Now, please provide the list of classes you want me to analyze!
+
+**Key things I'll focus on when you provide the real list:**
+
+*   **Purpose and Functionality:** What is each class/function *supposed* to do?  This helps me prioritize and identify missing pieces.
+*   **Relationships:** How do the classes/functions relate to each other?  What are the dependencies?
+*   **Clarity and Readability:** Is the code well-named and easy to understand?
+*   **Error Handling:** How are potential errors handled?
+*   **Maintainability:** Is the code designed in a way that makes it easy to modify and extend in the future?
+*   **Performance:** Are there any obvious performance bottlenecks?
+
+**Provide the list, and I'll do my best to provide a thorough analysis!**
 
 ## 🔹 Dependency Graphs

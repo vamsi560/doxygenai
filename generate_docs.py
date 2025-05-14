@@ -12,7 +12,7 @@ DOT_SVG_DIR = os.path.join(OUTPUT_DIR, "xml")
 IMG_DIR = os.path.join("docs", "images")
 
 configure(api_key=os.environ["GEMINI_API_KEY"])
-model = GenerativeModel("gemini-2.0-pro")
+model = GenerativeModel("gemini-2.0-flash")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 os.makedirs(IMG_DIR, exist_ok=True)

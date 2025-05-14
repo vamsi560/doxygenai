@@ -34,10 +34,11 @@ jobs:
       - name: Generate Documentation with Python Script
         run: python generate_docs.py .
 
-      - name: Commit and Push Docs
+      - name: ⬇ Commit AutoDocs Summary to Repo
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/
-          git diff --quiet && git diff --staged --quiet || git commit -m "📝 Auto-update Doxygen HTML docs"
-          git push
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git add AUTODOCS_SUMMARY.md
+          git commit -m "docs: update AutoDocs summary from Gemini for ${{ github.sha }}"
+          git push origin HEAD:${{ github.ref_name }}
+

@@ -6,7 +6,7 @@ from google.generativeai import GenerativeModel, configure
 
 # === CONFIG ===
 SRC_DIR = "repo"
-OUTPUT_DIR = "outputs"
+OUTPUT_DIR = "docs"
 SUMMARY_MD = "AUTODOCS_SUMMARY.md"
 DOT_SVG_DIR = os.path.join(OUTPUT_DIR, "xml")
 IMG_DIR = os.path.join("docs", "images")

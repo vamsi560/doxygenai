@@ -1,47 +1,46 @@
-name: Generate Doxygen Docs
+name: ✨ AutoDocs Generator
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-    
-permissions:
-  contents: write
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   generate-docs:
     runs-on: ubuntu-latest
-    
-    env:
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      AZURE_CONN_STRING: ${{ secrets.AZURE_CONN_STRING }}  
+
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout code
+      - name: 📂 Checkout repository
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Python
+      - name: 🔧 Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
-          
+          python-version: '3.10'
 
-      - name: Install Dependencies
+      - name: 📁 Install dependencies
         run: |
+          pip install beautifulsoup4 google-generativeai
           sudo apt-get install -y doxygen graphviz
-          pip install beautifulsoup4 google-generativeai azure-storage-blob
 
-      - name: Generate Documentation with Python Script
-        run: python generate_docs.py .
-
-      - name: ⬇ Commit AutoDocs Summary to Repo
+      - name: ✨ Run Doxygen + Gemini AI
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_SHA: ${{ github.sha }}
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git add AUTODOCS_SUMMARY.md
-          git commit -m "docs: update AutoDocs summary from Gemini for ${{ github.sha }}"
-          git push origin HEAD:${{ github.ref_name }}
+          python generate_docs.py
 
+      - name: ✏️ Configure Git
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: 📋 Commit and Push Docs
+        run: |
+          git add docs/ AUTODOCS_SUMMARY.md
+          git commit -m "docs: update AutoDocs summary from Gemini for ${{ github.sha }}" || echo "No changes to commit"
+          git push origin HEAD:${{ github.ref_name }}

@@ -1,105 +1,88 @@
-# generate_docs.py (Enhanced for versioning and GitHub commit)
-
 import os
-import shutil
 import subprocess
-import zipfile
-from pathlib import Path
+import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
-import google.generativeai as genai
+from google.generativeai import GenerativeModel, configure
 
-# === Configuration ===
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-REPO_ROOT = Path(__file__).parent
-OUTPUT_DIR = REPO_ROOT / "outputs" / "html"
-DOCS_DIR = REPO_ROOT / "docs"
-SUMMARY_MD = REPO_ROOT / "AUTODOCS_SUMMARY.md"
-DOXYFILE_PATH = REPO_ROOT / "Doxyfile"
-INPUT_DIR = REPO_ROOT / "source"
+# === CONFIG ===
+SRC_DIR = "repo"
+OUTPUT_DIR = "outputs"
+SUMMARY_MD = "AUTODOCS_SUMMARY.md"
+DOT_SVG_DIR = os.path.join(OUTPUT_DIR, "xml")
+IMG_DIR = os.path.join("docs", "images")
 
-GITHUB_SHA = os.getenv("GITHUB_SHA", "dev")
-VERSION_TAG = f"v-{GITHUB_SHA[:7]}"
-LATEST_DIR = DOCS_DIR / "latest"
-VERSIONED_DIR = DOCS_DIR / VERSION_TAG
+configure(api_key=os.environ["GEMINI_API_KEY"])
+model = GenerativeModel("gemini-2.0-pro")
 
-# === Setup Gemini ===
-genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-2.0-flash")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(IMG_DIR, exist_ok=True)
 
-# === Generate Doxygen HTML ===
-def run_doxygen():
-    doxy_content = f"""
-    PROJECT_NAME = AutoDocs
-    OUTPUT_DIRECTORY = {OUTPUT_DIR.parent}
-    INPUT = {INPUT_DIR}
-    RECURSIVE = YES
-    GENERATE_HTML = YES
-    HAVE_DOT = YES
-    CLASS_DIAGRAMS = YES
-    CALL_GRAPH = YES
-    CALLER_GRAPH = YES
-    COLLABORATION_GRAPH = YES
-    INCLUDE_GRAPH = YES
-    INCLUDED_BY_GRAPH = YES
-    GRAPHICAL_HIERARCHY = YES
-    DOT_IMAGE_FORMAT = svg
-    INTERACTIVE_SVG = YES
+# === Step 1: Run Doxygen with XML ===
+doxyfile = f"""
+PROJECT_NAME = AutoDocs
+OUTPUT_DIRECTORY = {OUTPUT_DIR}
+INPUT = {SRC_DIR}
+RECURSIVE = YES
+HAVE_DOT = YES
+GENERATE_XML = YES
+CALL_GRAPH = YES
+CALLER_GRAPH = YES
+CLASS_DIAGRAMS = YES
+INCLUDE_GRAPH = YES
+INCLUDED_BY_GRAPH = YES
+GRAPHICAL_HIERARCHY = YES
+GENERATE_HTML = NO
+"""
+
+with open("Doxyfile", "w") as f:
+    f.write(doxyfile)
+
+subprocess.run(["doxygen", "Doxyfile"], check=True)
+
+# === Step 2: Convert SVGs to PNGs ===
+DOT_DIR = os.path.join(OUTPUT_DIR, "xml")
+for root, _, files in os.walk(DOT_DIR):
+    for file in files:
+        if file.endswith(".svg"):
+            svg_path = os.path.join(root, file)
+            png_path = os.path.join(IMG_DIR, file.replace(".svg", ".png"))
+            subprocess.run(["rsvg-convert", "-o", png_path, svg_path], check=False)
+
+# === Step 3: Parse XML summary ===
+def parse_index_xml(xml_path):
+    classes = []
+    tree = ET.parse(xml_path)
+    root = tree.getroot()
+    for compound in root.findall("compound"):        
+        kind = compound.get("kind")
+        name = compound.findtext("name")
+        if kind in ["class", "struct"]:
+            classes.append(name)
+    return classes
+
+index_path = os.path.join(OUTPUT_DIR, "xml", "index.xml")
+classes = parse_index_xml(index_path)
+
+# === Step 4: Gemini Insights ===
+prompt = (
+    f"""Analyze this list of C++/Python classes and generate a Markdown summary with:
+    1. Top 5 important classes/functions
+    2. Missing docs
+    3. Improvements
+
+    Classes:
+    {classes[:30]}...
     """
-    with open(DOXYFILE_PATH, "w") as f:
-        f.write(doxy_content)
+)
+response = model.generate_content(prompt)
 
-    subprocess.run(["doxygen", str(DOXYFILE_PATH)], check=True)
+# === Step 5: Write to .md ===
+with open(SUMMARY_MD, "w", encoding="utf-8") as f:
+    f.write("# ✨ AutoDocs Summary\n\n")
+    f.write(response.text + "\n")
+    f.write("## 🔹 Dependency Graphs\n")
+    for png in sorted(os.listdir(IMG_DIR)):
+        if png.endswith(".png"):
+            f.write(f"![{png}](docs/images/{png})\n")
 
-# === Extract and Summarize ===
-def extract_text(folder):
-    content = []
-    for file in Path(folder).rglob("*.html"):
-        with open(file, "r", encoding="utf-8") as f:
-            soup = BeautifulSoup(f, "html.parser")
-            content.append(soup.get_text())
-    return "\n\n".join(content)[:12000]
-
-# === Save HTML docs to /docs/version/ and /docs/latest ===
-def save_docs():
-    if LATEST_DIR.exists():
-        shutil.rmtree(LATEST_DIR)
-    shutil.copytree(OUTPUT_DIR, LATEST_DIR)
-
-    if VERSIONED_DIR.exists():
-        shutil.rmtree(VERSIONED_DIR)
-    shutil.copytree(OUTPUT_DIR, VERSIONED_DIR)
-
-# === Generate Markdown Summary ===
-def generate_markdown(summary_text, classes_text, todos_text, legend_text):
-    with open(SUMMARY_MD, "w", encoding="utf-8") as md:
-        md.write(f"# AutoDocs Summary (via Gemini + Doxygen)\n\n")
-        md.write(f"### 🔖 Version: `{VERSION_TAG}`\n\n")
-        md.write(f"📂 [View HTML Docs](/docs/{VERSION_TAG}/index.html)\n\n")
-        md.write("## 📄 Summary\n\n" + summary_text + "\n\n")
-        md.write("## 📚 Classes & Interfaces\n\n" + classes_text + "\n\n")
-        md.write("## ❗ TODOs & Undocumented Items\n\n" + todos_text + "\n\n")
-        md.write("## 📊 Dependency Graph Overview\n\n" + legend_text + "\n")
-
-# === Main Process ===
-def main():
-    run_doxygen()
-    save_docs()
-    html_text = extract_text(OUTPUT_DIR)
-
-    summary = model.generate_content(f"Summarize this documentation:\n\n{html_text}").text
-    todos = model.generate_content(f"Extract TODOs and undocumented parts:\n\n{html_text}").text
-    classes = model.generate_content(f"List all classes and their brief roles:\n\n{html_text}").text
-
-    # Graph Legend from Doxygen file if exists
-    legend_path = OUTPUT_DIR / "graph_legend.html"
-    legend_text = ""
-    if legend_path.exists():
-        with open(legend_path, "r", encoding="utf-8") as f:
-            soup = BeautifulSoup(f, "html.parser")
-            legend_text = soup.get_text(strip=True)[:3000]
-
-    generate_markdown(summary, classes, todos, legend_text)
-    print("✅ Documentation generated and saved to repo.")
-
-if __name__ == "__main__":
-    main()
+print("✅ AUTODOCS_SUMMARY.md generated with graphs and AI insights.")

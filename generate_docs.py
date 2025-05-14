@@ -7,19 +7,14 @@ from bs4 import BeautifulSoup
 import google.generativeai as genai
 from azure.storage.blob import BlobServiceClient
 
-
 # === Configurations ===
-GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-AZURE_CONN_STRING = os.getenv('AZURE_CONN_STRING')
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+AZURE_CONN_STRING = os.getenv("AZURE_CONN_STRING")
 AZURE_CONTAINER_NAME = "doxygen-html"
 
 OUTPUT_FOLDER = "outputs"
 DOC_FOLDER = os.path.join(OUTPUT_FOLDER, "html")
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
-
-# Check if API keys are available
-if not GEMINI_API_KEY or not AZURE_CONN_STRING:
-    raise EnvironmentError("GEMINI_API_KEY or AZURE_CONN_STRING environment variable not set!")
 
 # === Configure Gemini ===
 genai.configure(api_key=GEMINI_API_KEY)
@@ -42,6 +37,16 @@ class AzureHelper:
 
 azure_helper = AzureHelper(AZURE_CONN_STRING, AZURE_CONTAINER_NAME)
 
+# === Extract Graph Summary ===
+def extract_dependency_graph_summary(html_dir):
+    graph_file = os.path.join(html_dir, "graph_legend.html")
+    if os.path.exists(graph_file):
+        with open(graph_file, "r", encoding="utf-8") as f:
+            soup = BeautifulSoup(f, "html.parser")
+            content = soup.get_text(separator="\n", strip=True)
+            return content[:2000]  # Trim for length
+    return "No dependency graph information found."
+
 # === Main Function ===
 def generate_docs(repo_path):
     print("\n📁 Cloning repository and preparing source...")
@@ -60,7 +65,6 @@ PROJECT_NAME = AutoDocs
 OUTPUT_DIRECTORY = {OUTPUT_FOLDER}
 INPUT = {source_path}
 RECURSIVE = YES
-
 HAVE_DOT = YES
 CLASS_DIAGRAMS = YES
 CALL_GRAPH = YES
@@ -96,9 +100,21 @@ GENERATE_HTML = YES
         print("\n☁️ Uploading to Azure Blob Storage...")
         blob_url = azure_helper.upload_file(zip_path, "html_output.zip")
 
-        print("\n✅ Documentation generated and uploaded successfully!")
-        print(f"🔗 Azure Blob URL: {blob_url}")
-        print(f"\n🧠 Gemini Summary:\n{gemini_response.text}\n")
+        print("\n🧠 Extracting graph summary...")
+        graph_summary = extract_dependency_graph_summary(html_output_dir)
+
+        # === Save Gemini summary to markdown file ===
+        markdown_path = os.path.join(repo_path, "AUTODOCS_SUMMARY.md")
+        with open(markdown_path, "w", encoding="utf-8") as md:
+            md.write(f"# AutoDocs Summary (via Gemini + Doxygen)\n\n")
+            md.write(f"## 📄 Summary\n\n{gemini_response.text.strip()}\n\n")
+            md.write(f"## 📊 Dependency Graph Overview\n\n{graph_summary}\n\n")
+            md.write(f"## 📁 Download Documentation\n")
+            md.write(f"- [HTML Documentation]({blob_url})\n")
+
+        print("\n✅ Markdown summary created and documentation uploaded!")
+        print(f"🔗 Blob URL: {blob_url}")
+        print(f"📄 Markdown saved to: {markdown_path}\n")
 
 
 if __name__ == "__main__":

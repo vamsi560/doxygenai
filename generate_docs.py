@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import google.generativeai as genai
 from azure.storage.blob import BlobServiceClient
 
+
 # === Configurations ===
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 AZURE_CONN_STRING = os.getenv('AZURE_CONN_STRING')

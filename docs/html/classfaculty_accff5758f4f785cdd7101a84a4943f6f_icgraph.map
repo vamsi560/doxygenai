@@ -1,0 +1,12 @@
+<map id="faculty::cancelSchedule" name="faculty::cancelSchedule">
+<area shape="rect" id="Node000001" title=" " alt="" coords="407,29,567,56"/>
+<area shape="rect" id="Node000002" href="$classfaculty.html#a9f11fad0a8fe1a55587ebff445849ef5" title=" " alt="" coords="203,29,359,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="392,54,360,54,360,49,392,49"/>
+<area shape="rect" id="Node000003" href="$classfaculty.html#ab6fb9e8a23404785830ab5cad9bb8502" title=" " alt="" coords="5,29,155,56"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="414,62,359,71,281,76,202,71,135,59,136,54,203,65,281,71,359,65,414,57"/>
+<area shape="poly" id="edge2_Node000002_Node000001" title=" " alt="" coords="375,31,407,31,406,37,375,36"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="315,16,303,10,281,8,260,10,249,15,246,20,251,27,247,30,241,21,245,11,259,5,281,3,305,5,318,12"/>
+<area shape="poly" id="edge4_Node000002_Node000003" title=" " alt="" coords="187,54,155,54,155,49,187,49"/>
+<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="170,31,202,31,202,37,170,36"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="114,16,102,10,80,8,59,10,48,15,45,20,50,27,46,30,40,21,44,11,58,5,80,3,104,5,117,12"/>
+</map>

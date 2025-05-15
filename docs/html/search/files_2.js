@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['facultylogin_2eh_0',['facultyLogin.h',['../faculty_login_8h.html',1,'']]]
+  ['dynsections_2ejs_0',['dynsections.js',['../latest_2dynsections_8js.html',1,'(Global Namespace)'],['../v-495b624_2dynsections_8js.html',1,'(Global Namespace)'],['../v-758fee6_2dynsections_8js.html',1,'(Global Namespace)'],['../v-75e9a94_2dynsections_8js.html',1,'(Global Namespace)'],['../v-e8a2192_2dynsections_8js.html',1,'(Global Namespace)']]]
 ];

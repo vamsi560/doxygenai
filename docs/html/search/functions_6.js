@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['run_5fdoxygen_0',['run_doxygen',['../namespacegenerate__docs.html#ab56860dbf993b0c50478285b569d5d8b',1,'generate_docs']]]
+  ['validatestring_0',['validateString',['../admin_login_8h.html#a441ea9843cdeda9e3c6e7377941d820c',1,'adminLogin.h']]],
+  ['viewschedule_1',['viewSchedule',['../classfaculty.html#ab6fb9e8a23404785830ab5cad9bb8502',1,'faculty']]]
 ];

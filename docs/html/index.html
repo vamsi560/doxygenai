@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>UploadedProject: Main Page</title>
+<title>UploadedProject: Auto-generated Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -101,10 +101,33 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">UploadedProject Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Auto-generated Documentation </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p>Okay, I will analyze the provided code files and generate a <code><a class="el" href="content_8dox.html">content.dox</a></code> file that includes a Doxygen-compatible documentation structure, a clickable </p><div class="dotgraph">
+<div class="caption">
+diagram representing the project's architecture, and an explanation of the diagram.</div>
+</div>
+<h1><a class="anchor" id="diagram_explanation"></a>
+Diagram Explanation</h1>
+<p>The diagram illustrates the following relationships:</p>
+<ul>
+<li><b>Controllers:</b> These handle user requests and interact with models and services to prepare data for the views. The <code>HomeController</code> is a primary example.</li>
+<li><b>Models:</b> Represent the data structures used within the application. The <code>MyModel</code> represents a data entity and usually contains properties that the View will render</li>
+<li><b>Views:</b> Display the data to the user. The <code>Index View</code> and <code>Privacy View</code> are examples and are Razor (cshtml) files.</li>
+<li><b>Services:</b> Encapsulate business logic and provide data access. <code>MyService</code> is responsible for carrying out any complex logic or interaction with external datasources.</li>
+</ul>
+<p>The typical flow is:</p>
+<ol type="1">
+<li>A user request is received by a Controller (e.g., <code>HomeController</code>).</li>
+<li>The Controller may use a Service (e.g., <code>MyService</code>) to retrieve or process data.</li>
+<li>The Controller prepares data using a Model (e.g., <code>MyModel</code>).</li>
+<li>The Controller selects a View (e.g., <code>Index View</code> or <code>Privacy View</code>) and passes the Model data to it.</li>
+<li>The View renders the data and presents it to the user.</li>
+</ol>
+<p>The links in the diagram allow you to navigate directly to the documentation for each component. </p>
+</div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->
 </div><!-- doc-content -->

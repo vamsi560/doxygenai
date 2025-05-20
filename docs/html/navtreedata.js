@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "UploadedProject", "index.html", [
-    [ "Auto-generated Documentation", "index.html", "index" ],
+    [ "Auto-generated Documentation", "index.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

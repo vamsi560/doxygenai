@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>UploadedProject: Auto-generated Documentation</title>
+<title>UploadedProject: Architecture and Code Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -102,34 +102,42 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Auto-generated Documentation </div></div>
+  <div class="headertitle"><div class="title">Architecture and Code Documentation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Okay, I will analyze the provided code files (which are not actually provided but that's okay, I will make the best possible assumptions for a standard ASP.NET MVC/Razor Pages structure) and create a <code><a class="el" href="content_8dox.html">content.dox</a></code> file as requested.</p>
-<div class="fragment"><div class="line"></div>
-</div><!-- fragment --><p>Key improvements and explanations: </p><pre class="fragment">**Doxygen Compatibility:**  The code is formatted to be parsed correctly by Doxygen.  The `/*!` at the beginning starts a Doxygen comment block.
-**`\mainpage`:**  Specifies this is the main page of the documentation.
-**Clear Sections:** Uses `\section overview` and `\subsection architecture` to structure the documentation.
-**Clickable `@dot` Diagram:**  The core of the solution.  The `\dot` and `\enddot` tags enclose a Graphviz DOT language description of the architecture.
-    `rankdir=TB;` Sets the diagram to be top-to-bottom.
-    `node [shape=box, style="rounded,filled", fillcolor=lightblue];`  Defines the default style for the nodes.
-    Clear labels for each node (Controller, Model, Service, View) that describe their role.
-    Arrows (`-&gt;`) show the direction of interaction between components.
-    Labels on the arrows explain the type of interaction (e.g., "Calls," "Uses," "Renders").
-    Subgraphs are used to cluster MVC components and Services visually.
-**`\section diagram_explanation`:**  Provides a detailed explanation of the diagram. This is crucial for users to understand the architecture. It describes the role of each component and the flow of a request.  The explanation is tailored to the diagram's specific structure.
-**Assumed Architecture:** Because no actual files were provided, I've assumed a standard ASP.NET MVC or Razor Pages architecture with a separate service layer.  The explanation matches that assumption.
-**Focus on Core Components:**  The diagram and explanation focus on the Controller, Model, View, and Service layers.
-**No Test/Build Files:** As requested, the document avoids including any test, build, or resource files.
-**Top-Down Flow:** The `rankdir=TB` attribute ensures a top-down diagram flow.
-**Precise Groupings and Subgroups:** The `subgraph` construct precisely groups MVC components and Services.
-</pre><p>To use this <code><a class="el" href="content_8dox.html">content.dox</a></code> file:</p>
-<ol type="1">
-<li>Save it as <code><a class="el" href="content_8dox.html">content.dox</a></code> in your project's documentation directory.</li>
-<li>Configure your Doxygen configuration file (<code>Doxyfile</code>) to include this file (usually by setting <code>INPUT = <a class="el" href="content_8dox.html">content.dox</a></code>).</li>
-<li>Run Doxygen to generate the documentation. The architecture diagram should be rendered on the main page.</li>
-</ol>
-<p>This response provides a comprehensive and well-documented <code><a class="el" href="content_8dox.html">content.dox</a></code> file that meets all the requirements outlined in the prompt, even without the specific code files. It is a good starting point and can be easily adapted to your specific project. Remember to replace the example class names and relationships with your actual implementation details for optimal results. </p>
+<div class="textblock"><p>This documentation provides an overview of the project's architecture, focusing on the relationships between modules, classes, and functions. It includes a visual representation of the project's structure using a dot diagram and a detailed explanation of the relationships between key components.</p>
+<h1><a class="anchor" id="overview"></a>
+Project Overview</h1>
+<p>This project consists of several modules organized to provide a structured and maintainable architecture. Key components include:</p>
+<ul>
+<li><b>CLI Layer</b>: Handles command-line interface interactions.</li>
+<li><b>Service Layer</b>: Implements the core business logic and functionalities.</li>
+<li><b>Data Layer</b>: Manages data storage and retrieval.</li>
+</ul>
+<h1><a class="anchor" id="architecture"></a>
+Architecture Diagram</h1>
+<div class="dotgraph">
+<img src="dot_inline_dotgraph_1.png" alt="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_1.map"/>
+</div>
+<h1><a class="anchor" id="architecture_explanation"></a>
+Diagram Explanation</h1>
+<p>The architecture diagram illustrates the high-level structure of the project and the dependencies between its main modules.</p><ul>
+<li>CLI interacts with the Service Layer.</li>
+<li>The Service Layer, containing business logic, uses the Data Layer for data persistence and retrieval.</li>
+</ul>
+<h1><a class="anchor" id="module_relationships"></a>
+Module Relationships</h1>
+<ul>
+<li><b>CLI Module</b>: This module is responsible for parsing command-line arguments and invoking the appropriate functions in the Service Layer. It acts as the entry point for user interactions.</li>
+<li><b>Service Module</b>: This module encapsulates the core business logic of the application. It receives requests from the CLI Module, processes them, and interacts with the Data Layer to persist or retrieve data. It serves as an intermediary between the user interface and the data storage mechanisms.</li>
+<li><b>Data Module</b>: This module handles all data-related operations, such as reading from and writing to a database or file system. It provides an abstraction layer that allows the Service Module to interact with data without needing to know the underlying storage details.</li>
+</ul>
+<h1><a class="anchor" id="class_relationships"></a>
+Class Relationships</h1>
+<ul>
+<li><b>admin Class</b>: Handles operations related to managing faculty/batch/schedule by admin.</li>
+<li><b>faculty Class</b>: Handles operations related to schedule by faculty. </li>
+</ul>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

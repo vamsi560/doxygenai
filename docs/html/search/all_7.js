@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loginid_0',['loginId',['../classfaculty.html#a805bc45bc66a57824219687b429b65b5',1,'faculty']]]
+  ['input_5fdir_0',['INPUT_DIR',['../namespacegenerate__docs.html#a20e719e03502536925fdd56440f4a4f5',1,'generate_docs']]]
 ];

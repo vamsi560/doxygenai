@@ -6,7 +6,8 @@ var searchData=
   ['adminlogin_2eh_3',['adminLogin.h',['../admin_login_8h.html',1,'']]],
   ['adminmodules_4',['adminModules',['../classadmin.html#a12a71ee0e0641ca0a2274aa5abc52d1d',1,'admin']]],
   ['allottrainer_5',['allotTrainer',['../classadmin.html#acadde72ad66790d2eea1c908c67ff579',1,'admin']]],
-  ['api_5fkey_6',['api_key',['../namespacegenerate__docs.html#ac02e96c8f3b51d31c8854069d4d49e49',1,'generate_docs']]],
-  ['architectural_20overview_7',['Architectural Overview',['../index.html#architecture_overview',1,'']]],
-  ['architecture_20documentation_8',['Software Architecture Documentation',['../index.html',1,'']]]
+  ['and_20class_20interaction_20diagram_6',['Module and Class Interaction Diagram',['../index.html#arch_diagram',1,'']]],
+  ['api_5fkey_7',['api_key',['../namespacegenerate__docs.html#ac02e96c8f3b51d31c8854069d4d49e49',1,'generate_docs']]],
+  ['architecture_20overview_8',['Architecture Overview',['../index.html#architecture_overview',1,'']]],
+  ['autodocs_20documentation_9',['AutoDocs Documentation',['../index.html',1,'']]]
 ];

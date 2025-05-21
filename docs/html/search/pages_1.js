@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['documentation_0',['Software Architecture Documentation',['../index.html',1,'']]]
+  ['documentation_0',['AutoDocs Documentation',['../index.html',1,'']]]
 ];

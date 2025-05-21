@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>UploadedProject: Software Architecture Documentation</title>
+<title>UploadedProject: AutoDocs Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -102,46 +102,43 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Software Architecture Documentation </div></div>
+  <div class="headertitle"><div class="title">AutoDocs Documentation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This documentation provides an overview of the software architecture. It focuses on the interaction between different modules, classes, and functions within the system, emphasizing the logical structure and relationships between various layers, including packages, services, and the command-line interface (CLI).</p>
+<div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
+Introduction</h1>
+<p>This is the documentation for the AutoDocs project, automatically generated using Doxygen. This documentation provides an overview of the project's architecture, modules, classes, and their interactions. The documentation focuses on providing a high-level understanding of the system by emphasizing the logical structure.</p>
 <h1><a class="anchor" id="architecture_overview"></a>
-Architectural Overview</h1>
-<p>The system is structured in a layered architecture to promote modularity, maintainability, and testability. The primary layers include:</p>
-<ul>
-<li><b>CLI (Command Line Interface):</b> The entry point for user interaction, responsible for parsing user commands and invoking the appropriate services.</li>
-<li><b>Services Layer:</b> Contains business logic and orchestrates the execution of tasks by utilizing lower-level modules.</li>
-<li><b>Data Access Layer:</b> Modules responsible for interacting with data storage, handling data retrieval, persistence, and management.</li>
-</ul>
-<h1><a class="anchor" id="module_interaction"></a>
-Module Interaction Diagram</h1>
+Architecture Overview</h1>
+<p>This section provides a graphical overview of the system's architecture, highlighting the key modules, classes, and their relationships.</p>
+<h2><a class="anchor" id="arch_diagram"></a>
+Module and Class Interaction Diagram</h2>
 <div class="dotgraph">
 <img src="dot_inline_dotgraph_1.png" alt="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_1.map"/>
 </div>
-<h1><a class="anchor" id="graph_explanation"></a>
-Graph Explanation</h1>
-<p>The above diagram illustrates the interactions between key modules and classes:</p>
+<h2><a class="anchor" id="arch_explanation"></a>
+Diagram Explanation</h2>
+<p>The architecture diagram illustrates the high-level structure of the AutoDocs project.</p>
 <ul>
-<li><b>CLI:</b> This represents the command-line interface, which serves as the primary interaction point for the user. It depends on the <code>AdminService</code> and <code>FacultyService</code> to perform administrative and faculty-related tasks, respectively.</li>
-<li><b>AdminService and FacultyService:</b> These services encapsulate the business logic for administrative and faculty operations. They are responsible for orchestrating the execution of tasks, utilizing the <code>DataAccess</code> layer for data persistence and retrieval. Each Service creates/uses Admin and Faculty classes, respectively.</li>
-<li><b>DataAccess:</b> This layer provides an abstraction for data access operations. It isolates the rest of the system from the specific data storage implementation, making it easier to change the database or other data storage mechanisms without affecting other modules.</li>
-<li><b>Admin and Faculty Classes:</b> These classes represent data models used within the service layer. They define the structure and behavior related to Admin and Faculty entities.</li>
-<li><b><a class="el" href="admin_login_8h.html">adminLogin.h</a> and <a class="el" href="faculty_login_8h.html">facultyLogin.h</a>:</b> These headers define the classes Admin and Faculty, respectively.</li>
+<li><b>CLI Layer</b>: The <code>CLI</code> module, represented by <code><a class="el" href="main_8cpp.html">main.cpp</a></code>, serves as the entry point for the application. It's responsible for parsing user commands and interacting with the underlying services.</li>
+<li><b>Services Layer</b>: This layer encapsulates the core business logic of the application. In this project, we see authentication services.<ul>
+<li><code><a class="el" href="admin_login_8h.html">adminLogin.h</a></code> with the <code>admin</code> class handles admin authentication, authorization, and other admin-related functionalities.</li>
+<li><code><a class="el" href="faculty_login_8h.html">facultyLogin.h</a></code> with the <code>faculty</code> class handles faculty authentication, authorization, and other faculty-related functionalities.</li>
 </ul>
-<h1><a class="anchor" id="relationships"></a>
-Class/Module Relationships</h1>
-<ul>
-<li><b>Aggregation:</b> <code>AdminService</code> and <code>FacultyService</code> aggregate <code>DataAccess</code>. This means that these services contain and utilize data access functionality, but the lifecycle of <code>DataAccess</code> is independent of the services.</li>
-<li><b>Dependency:</b> <code>CLI</code> depends on <code>AdminService</code> and <code>FacultyService</code>. Changes to the service interfaces might require modifications in the CLI layer.</li>
-<li><b>Association:</b> <code>AdminService</code> associates with <code>Admin</code> class, while <code>FacultyService</code> associates with <code>Faculty</code> class.</li>
+</li>
+<li><b>Classes</b>: Represented by ellipses, they show the objects that perform actions.<ul>
+<li><code>admin</code> class provides functionalty for admin.</li>
+<li><code>faculty</code> class provides functionalty for faculty.</li>
 </ul>
-<h1><a class="anchor" id="insights"></a>
-Insights</h1>
+</li>
+</ul>
+<p>The arrows indicate dependencies. The <code>CLI</code> module <code>Uses</code> the authentication services from the <code>Services Layer</code> which in turn define the <code>admin</code> and <code>faculty</code> classes.</p>
+<h1><a class="anchor" id="graph_insights"></a>
+Graph Insights</h1>
 <ul>
-<li><b>Layered Architecture:</b> The layered architecture enhances maintainability and testability by separating concerns.</li>
-<li><b>Loose Coupling:</b> The use of the <code>DataAccess</code> layer promotes loose coupling between the services and the data storage implementation.</li>
-<li><b>Clear Dependencies:</b> The diagram clearly illustrates the dependencies between different modules and classes, providing a better understanding of the system's overall structure. </li>
+<li><b>Dependency Flow</b>: The diagram shows a clear flow of control and data from the <code>CLI</code> to the <code>Services Layer</code>. The CLI directly utilizes functions of <code>adminLogin</code> and <code>facultyLogin</code>.</li>
+<li><b>Loose Coupling</b>: The modular design promotes loose coupling between the CLI and Services layers, enabling independent changes and easier maintenance.</li>
+<li><b>Scalability</b>: The layered architecture supports scalability, allowing you to add more services and features without significantly impacting the existing code. </li>
 </ul>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>

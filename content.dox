@@ -1,70 +1,63 @@
 ```doxygen
-/*! \mainpage Software Architecture Documentation
+/*! \mainpage AutoDocs Documentation
 
-This documentation provides an overview of the software architecture. It focuses on the interaction between different modules, classes, and functions within the system, emphasizing the logical structure and relationships between various layers, including packages, services, and the command-line interface (CLI).
+\section intro_sec Introduction
+This is the documentation for the AutoDocs project, automatically generated using Doxygen. This documentation provides an overview of the project's architecture, modules, classes, and their interactions.  The documentation focuses on providing a high-level understanding of the system by emphasizing the logical structure.
 
-\section architecture_overview Architectural Overview
+\section architecture_overview Architecture Overview
 
-The system is structured in a layered architecture to promote modularity, maintainability, and testability.  The primary layers include:
+This section provides a graphical overview of the system's architecture, highlighting the key modules, classes, and their relationships.
 
-- **CLI (Command Line Interface):** The entry point for user interaction, responsible for parsing user commands and invoking the appropriate services.
-- **Services Layer:**  Contains business logic and orchestrates the execution of tasks by utilizing lower-level modules.
-- **Data Access Layer:** Modules responsible for interacting with data storage, handling data retrieval, persistence, and management.
-
-\section module_interaction Module Interaction Diagram
+\subsection arch_diagram Module and Class Interaction Diagram
 
 \dot
-digraph ModuleInteraction {
-    rankdir=LR;
+digraph architecture {
     node [shape=box];
 
-    CLI [label="CLI", style=filled, fillcolor=lightgray];
-    AdminService [label="Admin Service"];
-    FacultyService [label="Faculty Service"];
-    DataAccess [label="Data Access", shape=cylinder];
-    Admin [label="Admin Class", shape=ellipse];
-    Faculty [label="Faculty Class", shape=ellipse];
-    adminLogin_h [label="adminLogin.h", shape=component];
-    facultyLogin_h [label="facultyLogin.h", shape=component];
+    // Define Modules/Packages
+    subgraph cluster_cli {
+        label = "CLI Layer";
+        cli_module [label="CLI\n(main.cpp)"];
+    }
 
-    CLI -> AdminService [label="invokes"];
-    CLI -> FacultyService [label="invokes"];
-    AdminService -> DataAccess [label="uses"];
-    FacultyService -> DataAccess [label="uses"];
-    AdminService -> Admin [label="creates/uses"];
-    FacultyService -> Faculty [label="creates/uses"];
-    adminLogin_h -> Admin [label="defines"];
-    facultyLogin_h -> Faculty [label="defines"];
+    subgraph cluster_services {
+        label = "Services Layer";
+	  admin_login_module [label="adminLogin.h\nadmin"];
+	  faculty_login_module [label="facultyLogin.h\nfaculty"];
+    }
+
+    // Define Classes
+    admin [label="admin", shape=ellipse];
+	faculty [label="faculty", shape=ellipse];
+
+    // Define Relationships
+    cli_module -> admin_login_module [label="Uses"];
+	cli_module -> faculty_login_module [label="Uses"];
+	admin_login_module -> admin [label="Defines"];
+	faculty_login_module -> faculty [label="Defines"];
 }
 \enddot
 
-\section graph_explanation Graph Explanation
+\subsection arch_explanation Diagram Explanation
 
-The above diagram illustrates the interactions between key modules and classes:
+The architecture diagram illustrates the high-level structure of the AutoDocs project.
 
-- **CLI:** This represents the command-line interface, which serves as the primary interaction point for the user.  It depends on the `AdminService` and `FacultyService` to perform administrative and faculty-related tasks, respectively.
+-   **CLI Layer**: The `CLI` module, represented by `main.cpp`, serves as the entry point for the application. It's responsible for parsing user commands and interacting with the underlying services.
 
-- **AdminService and FacultyService:** These services encapsulate the business logic for administrative and faculty operations.  They are responsible for orchestrating the execution of tasks, utilizing the `DataAccess` layer for data persistence and retrieval. Each Service creates/uses Admin and Faculty classes, respectively.
+-   **Services Layer**: This layer encapsulates the core business logic of the application. In this project, we see authentication services.
+    -   `adminLogin.h` with the `admin` class handles admin authentication, authorization, and other admin-related functionalities.
+	-   `facultyLogin.h` with the `faculty` class handles faculty authentication, authorization, and other faculty-related functionalities.
 
-- **DataAccess:** This layer provides an abstraction for data access operations.  It isolates the rest of the system from the specific data storage implementation, making it easier to change the database or other data storage mechanisms without affecting other modules.
+-   **Classes**: Represented by ellipses, they show the objects that perform actions.
+    - `admin` class provides functionalty for admin.
+	- `faculty` class provides functionalty for faculty.
 
-- **Admin and Faculty Classes:** These classes represent data models used within the service layer. They define the structure and behavior related to Admin and Faculty entities.
+The arrows indicate dependencies.  The `CLI` module `Uses` the authentication services from the `Services Layer` which in turn define the `admin` and `faculty` classes.
 
-- **adminLogin.h and facultyLogin.h:** These headers define the classes Admin and Faculty, respectively.
+\section graph_insights Graph Insights
 
-\section relationships Class/Module Relationships
-
-- **Aggregation:**  `AdminService` and `FacultyService` aggregate `DataAccess`. This means that these services contain and utilize data access functionality, but the lifecycle of `DataAccess` is independent of the services.
-
-- **Dependency:**  `CLI` depends on `AdminService` and `FacultyService`. Changes to the service interfaces might require modifications in the CLI layer.
-
-- **Association:** `AdminService` associates with `Admin` class, while `FacultyService` associates with `Faculty` class.
-
-\section insights Insights
-
-- **Layered Architecture:** The layered architecture enhances maintainability and testability by separating concerns.
-- **Loose Coupling:** The use of the `DataAccess` layer promotes loose coupling between the services and the data storage implementation.
-- **Clear Dependencies:** The diagram clearly illustrates the dependencies between different modules and classes, providing a better understanding of the system's overall structure.
-
+-   **Dependency Flow**: The diagram shows a clear flow of control and data from the `CLI` to the `Services Layer`. The CLI directly utilizes functions of `adminLogin` and `facultyLogin`.
+-   **Loose Coupling**:  The modular design promotes loose coupling between the CLI and Services layers, enabling independent changes and easier maintenance.
+-   **Scalability**:  The layered architecture supports scalability, allowing you to add more services and features without significantly impacting the existing code.
 */
 ```

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>UploadedProject: Architecture Overview</title>
+<title>UploadedProject: AutoDocs Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -102,32 +102,41 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Architecture Overview </div></div>
+  <div class="headertitle"><div class="title">AutoDocs Documentation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This document provides an overview of the system's architecture, focusing on the relationships between modules, classes, and functions.</p>
-<h1><a class="anchor" id="architecture"></a>
-Architecture Diagram</h1>
-<p>The following diagram illustrates the high-level architecture of the system. It highlights the packages, services, and CLI layers, and their interactions.</p>
+<div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
+Introduction</h1>
+<p>This documentation provides an overview of the AutoDocs project, generated using Doxygen and Gemini. It covers the project's structure, key classes, and their interactions.</p>
+<h1><a class="anchor" id="architecture_sec"></a>
+Project Architecture</h1>
+<p>The project follows a layered architecture, comprising a CLI layer, services layer, and data layer. The following diagram illustrates the relationships between the key components.</p>
+<h2><a class="anchor" id="arch_diagram"></a>
+Architecture Diagram</h2>
 <div class="dotgraph">
 <img src="dot_inline_dotgraph_1.png" alt="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_1.map"/>
-<map name="dot_inline_dotgraph_1.map" id="dot_inline_dotgraph_1.map"><area shape="rect" href="generate__docs_8py.html" title="CLI Entrypoint" alt="" coords="27,136,159,184"/>
-<area shape="rect" href="classadmin.html" title="admin" alt="" coords="256,103,328,151"/>
-<area shape="rect" href="classfaculty.html" title="faculty" alt="" coords="256,175,328,223"/>
-<area shape="rect" href="generate__docs_8py.html" title="Doxyfile" alt="" coords="478,60,563,108"/>
-<area shape="rect" href="generate__docs_8py.html" title="Gemini AI" alt="" coords="471,179,570,227"/>
+<map name="dot_inline_dotgraph_1.map" id="dot_inline_dotgraph_1.map"><area shape="rect" href="" title="Admin Class" alt="" coords="43,355,160,403"/>
+<area shape="rect" href="" title="Faculty Class" alt="" coords="183,355,302,403"/>
 </map>
 </div>
-<h1><a class="anchor" id="graph_insights"></a>
-Graph Insights</h1>
-<p>The architecture is structured into three primary layers:</p>
-<ul>
-<li><b>CLI Layer:</b> This layer provides the command-line interface for users to interact with the system. The <code>cli</code> node represents the main entry point for executing tasks and triggering underlying services. The entrypoint is located in <code><a class="el" href="generate__docs_8py.html">generate_docs.py</a></code></li>
-<li><b>Service Layer:</b> This layer encompasses the core business logic of the application. The <code>admin</code> and <code>faculty</code> classes encapsulate functionalities related to administrative and faculty tasks, respectively. These classes orchestrate actions and interact with the Model Layer.</li>
-<li><b>Model Layer:</b> This layer represents the data model and configuration files used by the services. The <code>Doxyfile</code> is a key component in this layer, defining the configuration for the Doxygen documentation generation tool.</li>
-<li><b>Gemini AI:</b> This service uses the Gemini AI api, and is configured with an API key.</li>
+<h2><a class="anchor" id="arch_explanation"></a>
+Diagram Explanation</h2>
+<p>This diagram illustrates the high-level architecture of the system:</p><ul>
+<li><b>CLI Layer:</b> The command-line interface serves as the entry point for users to interact with the system.</li>
+<li><b>Services Layer:</b> This layer encapsulates the business logic and provides services related to admin and faculty operations.</li>
+<li><b>Data Layer:</b> This layer contains the <code>Admin</code> and <code>Faculty</code> classes, representing data models and their associated functionalities.</li>
 </ul>
-<p>The <code>CLI Layer</code> drives the services. The Service layer then uses the <code>Model Layer</code> and <code>Gemini AI</code> to carry out tasks. This design promotes modularity and separation of concerns. </p>
+<h1><a class="anchor" id="class_relationships"></a>
+Class and Module Relationships</h1>
+<p>The project includes two main classes, <code>Admin</code> and <code>Faculty</code>, which have distinct roles within the system.</p>
+<ul>
+<li>The <code>Admin</code> class handles administrative tasks, such as creating and updating schedules, allotting trainers, and generating reports.</li>
+<li>The <code>Faculty</code> class is responsible for faculty-related operations, including viewing and canceling schedules.</li>
+<li>The CLI interacts with the admin and faculty modules.</li>
+</ul>
+<h1><a class="anchor" id="further_info"></a>
+Further Information</h1>
+<p>For detailed information on specific classes and functions, please refer to the class and module documentation. </p>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

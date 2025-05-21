@@ -5,6 +5,7 @@ var searchData=
   ['menu_2ejs_2',['menu.js',['../latest_2menu_8js.html',1,'(Global Namespace)'],['../v-495b624_2menu_8js.html',1,'(Global Namespace)'],['../v-758fee6_2menu_8js.html',1,'(Global Namespace)'],['../v-75e9a94_2menu_8js.html',1,'(Global Namespace)'],['../v-e8a2192_2menu_8js.html',1,'(Global Namespace)']]],
   ['menudata_2ejs_3',['menudata.js',['../latest_2menudata_8js.html',1,'(Global Namespace)'],['../v-495b624_2menudata_8js.html',1,'(Global Namespace)'],['../v-758fee6_2menudata_8js.html',1,'(Global Namespace)'],['../v-75e9a94_2menudata_8js.html',1,'(Global Namespace)'],['../v-e8a2192_2menudata_8js.html',1,'(Global Namespace)']]],
   ['model_4',['model',['../namespacegenerate__docs.html#a0d9f5de9d2ffea03236d86861c94405f',1,'generate_docs']]],
-  ['month_5',['month',['../admin_login_8h.html#a2f42dbaad0502d97e23be5554a618c67',1,'adminLogin.h']]],
-  ['monthdays_6',['monthDays',['../admin_login_8h.html#ad98b5bd0f775e90a242952750b96f3d7',1,'adminLogin.h']]]
+  ['module_20relationships_5',['Class and Module Relationships',['../index.html#class_relationships',1,'']]],
+  ['month_6',['month',['../admin_login_8h.html#a2f42dbaad0502d97e23be5554a618c67',1,'adminLogin.h']]],
+  ['monthdays_7',['monthDays',['../admin_login_8h.html#ad98b5bd0f775e90a242952750b96f3d7',1,'adminLogin.h']]]
 ];

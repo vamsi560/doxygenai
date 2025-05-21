@@ -1,64 +1,63 @@
 ```doxygen
-/*! \mainpage Architecture Overview
+/*! \mainpage AutoDocs Documentation
 
-This document provides an overview of the system's architecture, focusing on the relationships between modules, classes, and functions.
+\section intro_sec Introduction
 
-\section architecture Architecture Diagram
+This documentation provides an overview of the AutoDocs project, generated using Doxygen and Gemini.
+It covers the project's structure, key classes, and their interactions.
 
-The following diagram illustrates the high-level architecture of the system. It highlights the packages, services, and CLI layers, and their interactions.
+\section architecture_sec Project Architecture
+
+The project follows a layered architecture, comprising a CLI layer, services layer, and data layer.
+The following diagram illustrates the relationships between the key components.
+
+\subsection arch_diagram Architecture Diagram
 
 \dot
-digraph Architecture {
-  rankdir=LR;
-  node [shape=box, style=filled, color=lightblue];
+digraph architecture {
+    node [shape=box];
 
-  subgraph cluster_cli {
-    label = "CLI Layer";
-    style = dashed;
-    cli [label="CLI Entrypoint", URL="generate__docs_8py.html"];
-  }
+    subgraph cluster_cli {
+        label = "CLI Layer";
+        cli [label="CLI", style=filled, fillcolor=lightgreen];
+    }
 
-  subgraph cluster_service {
-    label = "Service Layer";
-    style = dashed;
-    admin [label="admin", URL="classadmin.html"];
-    faculty [label="faculty", URL="classfaculty.html"];
+    subgraph cluster_services {
+        label = "Services Layer";
+        admin_service [label="Admin Service", style=filled, fillcolor=lightblue];
+        faculty_service [label="Faculty Service", style=filled, fillcolor=lightblue];
+    }
 
-  }
+    subgraph cluster_data {
+        label = "Data Layer";
+        admin_class [label="Admin Class", style=filled, fillcolor=lightyellow, URL="@ref classadmin"];
+        faculty_class [label="Faculty Class", style=filled, fillcolor=lightyellow, URL="@ref classfaculty"];
+    }
 
-    subgraph cluster_model {
-    label = "Model Layer";
-    style = dashed;
-    Doxyfile [label="Doxyfile", URL="generate__docs_8py.html"];
-  }
-
-   subgraph cluster_gemini {
-    label = "Gemini AI";
-    style = dashed;
-    GenAI [label="Gemini AI", URL="generate__docs_8py.html"];
-  }
-
-  cli -> admin [label="Uses"];
-  cli -> faculty [label="Uses"];
-
-  admin -> Doxyfile [label="Configures"];
-  admin -> GenAI [label="Uses"];
-
-  faculty -> GenAI [label="Uses"];
-  faculty -> Doxyfile [label="Configures"];
-
+    cli -> admin_service [label="Uses"];
+    cli -> faculty_service [label="Uses"];
+    admin_service -> admin_class [label="Manages"];
+    faculty_service -> faculty_class [label="Manages"];
 }
 \enddot
 
-\section graph_insights Graph Insights
+\subsection arch_explanation Diagram Explanation
 
-The architecture is structured into three primary layers:
+This diagram illustrates the high-level architecture of the system:
+- **CLI Layer:**  The command-line interface serves as the entry point for users to interact with the system.
+- **Services Layer:** This layer encapsulates the business logic and provides services related to admin and faculty operations.
+- **Data Layer:**  This layer contains the `Admin` and `Faculty` classes, representing data models and their associated functionalities.
 
-- **CLI Layer:** This layer provides the command-line interface for users to interact with the system.  The `cli` node represents the main entry point for executing tasks and triggering underlying services. The entrypoint is located in `generate_docs.py`
-- **Service Layer:** This layer encompasses the core business logic of the application. The `admin` and `faculty` classes encapsulate functionalities related to administrative and faculty tasks, respectively.  These classes orchestrate actions and interact with the Model Layer.
-- **Model Layer:** This layer represents the data model and configuration files used by the services.  The `Doxyfile` is a key component in this layer, defining the configuration for the Doxygen documentation generation tool.
-- **Gemini AI:** This service uses the Gemini AI api, and is configured with an API key.
+\section class_relationships Class and Module Relationships
 
-The `CLI Layer` drives the services.  The Service layer then uses the `Model Layer` and `Gemini AI` to carry out tasks.  This design promotes modularity and separation of concerns.
+The project includes two main classes, `Admin` and `Faculty`, which have distinct roles within the system.
+
+- The `Admin` class handles administrative tasks, such as creating and updating schedules, allotting trainers, and generating reports.
+- The `Faculty` class is responsible for faculty-related operations, including viewing and canceling schedules.
+- The CLI interacts with the admin and faculty modules.
+
+\section further_info Further Information
+
+For detailed information on specific classes and functions, please refer to the class and module documentation.
 */
 ```

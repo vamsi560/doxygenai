@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>UploadedProject: AutoDocs Documentation</title>
+<title>UploadedProject: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -101,46 +101,10 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">AutoDocs Documentation </div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">UploadedProject Documentation</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
-Introduction</h1>
-<p>This is the documentation for the AutoDocs project, automatically generated using Doxygen. This documentation provides an overview of the project's architecture, modules, classes, and their interactions. The documentation focuses on providing a high-level understanding of the system by emphasizing the logical structure.</p>
-<h1><a class="anchor" id="architecture_overview"></a>
-Architecture Overview</h1>
-<p>This section provides a graphical overview of the system's architecture, highlighting the key modules, classes, and their relationships.</p>
-<h2><a class="anchor" id="arch_diagram"></a>
-Module and Class Interaction Diagram</h2>
-<div class="dotgraph">
-<img src="dot_inline_dotgraph_1.png" alt="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_1.map"/>
-</div>
-<h2><a class="anchor" id="arch_explanation"></a>
-Diagram Explanation</h2>
-<p>The architecture diagram illustrates the high-level structure of the AutoDocs project.</p>
-<ul>
-<li><b>CLI Layer</b>: The <code>CLI</code> module, represented by <code><a class="el" href="main_8cpp.html">main.cpp</a></code>, serves as the entry point for the application. It's responsible for parsing user commands and interacting with the underlying services.</li>
-<li><b>Services Layer</b>: This layer encapsulates the core business logic of the application. In this project, we see authentication services.<ul>
-<li><code><a class="el" href="admin_login_8h.html">adminLogin.h</a></code> with the <code>admin</code> class handles admin authentication, authorization, and other admin-related functionalities.</li>
-<li><code><a class="el" href="faculty_login_8h.html">facultyLogin.h</a></code> with the <code>faculty</code> class handles faculty authentication, authorization, and other faculty-related functionalities.</li>
-</ul>
-</li>
-<li><b>Classes</b>: Represented by ellipses, they show the objects that perform actions.<ul>
-<li><code>admin</code> class provides functionalty for admin.</li>
-<li><code>faculty</code> class provides functionalty for faculty.</li>
-</ul>
-</li>
-</ul>
-<p>The arrows indicate dependencies. The <code>CLI</code> module <code>Uses</code> the authentication services from the <code>Services Layer</code> which in turn define the <code>admin</code> and <code>faculty</code> classes.</p>
-<h1><a class="anchor" id="graph_insights"></a>
-Graph Insights</h1>
-<ul>
-<li><b>Dependency Flow</b>: The diagram shows a clear flow of control and data from the <code>CLI</code> to the <code>Services Layer</code>. The CLI directly utilizes functions of <code>adminLogin</code> and <code>facultyLogin</code>.</li>
-<li><b>Loose Coupling</b>: The modular design promotes loose coupling between the CLI and Services layers, enabling independent changes and easier maintenance.</li>
-<li><b>Scalability</b>: The layered architecture supports scalability, allowing you to add more services and features without significantly impacting the existing code. </li>
-</ul>
-</div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->
 </div><!-- doc-content -->

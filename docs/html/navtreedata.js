@@ -25,7 +25,6 @@
 var NAVTREE =
 [
   [ "UploadedProject", "index.html", [
-    [ "AutoDocs Documentation", "index.html", "index" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [

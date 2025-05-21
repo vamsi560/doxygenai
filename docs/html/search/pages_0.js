@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['autodocs_20documentation_0',['AutoDocs Documentation',['../index.html',1,'']]]
+  ['auto_20generated_20documentation_0',['Auto-generated Documentation',['../index.html',1,'']]]
 ];

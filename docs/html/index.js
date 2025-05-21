@@ -1,7 +1,8 @@
 var index =
 [
-    [ "Architecture Overview", "index.html#architecture", null ],
+    [ "Architectural Overview", "index.html#architecture_overview", null ],
     [ "Module Interaction Diagram", "index.html#module_interaction", null ],
     [ "Graph Explanation", "index.html#graph_explanation", null ],
-    [ "Further Documentation", "index.html#next_steps", null ]
+    [ "Class/Module Relationships", "index.html#relationships", null ],
+    [ "Insights", "index.html#insights", null ]
 ];

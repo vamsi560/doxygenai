@@ -7,6 +7,6 @@ var searchData=
   ['adminmodules_4',['adminModules',['../classadmin.html#a12a71ee0e0641ca0a2274aa5abc52d1d',1,'admin']]],
   ['allottrainer_5',['allotTrainer',['../classadmin.html#acadde72ad66790d2eea1c908c67ff579',1,'admin']]],
   ['api_5fkey_6',['api_key',['../namespacegenerate__docs.html#ac02e96c8f3b51d31c8854069d4d49e49',1,'generate_docs']]],
-  ['architecture_20overview_7',['Architecture Overview',['../index.html#architecture',1,'']]],
-  ['autodocs_20project_8',['AutoDocs Project',['../index.html',1,'']]]
+  ['architectural_20overview_7',['Architectural Overview',['../index.html#architecture_overview',1,'']]],
+  ['architecture_20documentation_8',['Software Architecture Documentation',['../index.html',1,'']]]
 ];

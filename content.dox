@@ -1,64 +1,64 @@
 ```doxygen
-/*! \mainpage Architecture and Code Documentation
+/*! \mainpage Architecture Overview
 
-This documentation provides an overview of the project's architecture, focusing on the relationships between modules, classes, and functions. It includes a visual representation of the project's structure using a dot diagram and a detailed explanation of the relationships between key components.
-
-\section overview Project Overview
-
-This project consists of several modules organized to provide a structured and maintainable architecture. Key components include:
-
-- **CLI Layer**: Handles command-line interface interactions.
-- **Service Layer**: Implements the core business logic and functionalities.
-- **Data Layer**: Manages data storage and retrieval.
+This document provides an overview of the system's architecture, focusing on the relationships between modules, classes, and functions.
 
 \section architecture Architecture Diagram
 
+The following diagram illustrates the high-level architecture of the system. It highlights the packages, services, and CLI layers, and their interactions.
+
 \dot
-digraph architecture {
-    node [shape=box];
+digraph Architecture {
+  rankdir=LR;
+  node [shape=box, style=filled, color=lightblue];
 
-    subgraph cluster_cli {
-        label = "CLI Layer";
-        cli_module [label="CLI Module", style=filled, fillcolor=lightblue];
-    }
+  subgraph cluster_cli {
+    label = "CLI Layer";
+    style = dashed;
+    cli [label="CLI Entrypoint", URL="generate__docs_8py.html"];
+  }
 
-    subgraph cluster_service {
-        label = "Service Layer";
-        service_module [label="Service Module", style=filled, fillcolor=lightgreen];
-        admin [label="admin", style=filled, fillcolor=lightgreen];
-		faculty [label="faculty", style=filled, fillcolor=lightgreen];
-    }
+  subgraph cluster_service {
+    label = "Service Layer";
+    style = dashed;
+    admin [label="admin", URL="classadmin.html"];
+    faculty [label="faculty", URL="classfaculty.html"];
 
-    subgraph cluster_data {
-        label = "Data Layer";
-        data_module [label="Data Module", style=filled, fillcolor=lightyellow];
-    }
+  }
 
-    cli_module -> service_module [label="Uses"];
-    service_module -> data_module [label="Accesses"];
-	admin -> service_module [label="Admin"];
-	faculty -> service_module [label="faculty"];
+    subgraph cluster_model {
+    label = "Model Layer";
+    style = dashed;
+    Doxyfile [label="Doxyfile", URL="generate__docs_8py.html"];
+  }
+
+   subgraph cluster_gemini {
+    label = "Gemini AI";
+    style = dashed;
+    GenAI [label="Gemini AI", URL="generate__docs_8py.html"];
+  }
+
+  cli -> admin [label="Uses"];
+  cli -> faculty [label="Uses"];
+
+  admin -> Doxyfile [label="Configures"];
+  admin -> GenAI [label="Uses"];
+
+  faculty -> GenAI [label="Uses"];
+  faculty -> Doxyfile [label="Configures"];
+
 }
 \enddot
 
-\section architecture_explanation Diagram Explanation
+\section graph_insights Graph Insights
 
-The architecture diagram illustrates the high-level structure of the project and the dependencies between its main modules.
-- CLI interacts with the Service Layer.
-- The Service Layer, containing business logic, uses the Data Layer for data persistence and retrieval.
+The architecture is structured into three primary layers:
 
-\section module_relationships Module Relationships
+- **CLI Layer:** This layer provides the command-line interface for users to interact with the system.  The `cli` node represents the main entry point for executing tasks and triggering underlying services. The entrypoint is located in `generate_docs.py`
+- **Service Layer:** This layer encompasses the core business logic of the application. The `admin` and `faculty` classes encapsulate functionalities related to administrative and faculty tasks, respectively.  These classes orchestrate actions and interact with the Model Layer.
+- **Model Layer:** This layer represents the data model and configuration files used by the services.  The `Doxyfile` is a key component in this layer, defining the configuration for the Doxygen documentation generation tool.
+- **Gemini AI:** This service uses the Gemini AI api, and is configured with an API key.
 
-- **CLI Module**: This module is responsible for parsing command-line arguments and invoking the appropriate functions in the Service Layer.  It acts as the entry point for user interactions.
-
-- **Service Module**: This module encapsulates the core business logic of the application.  It receives requests from the CLI Module, processes them, and interacts with the Data Layer to persist or retrieve data.  It serves as an intermediary between the user interface and the data storage mechanisms.
-
-- **Data Module**: This module handles all data-related operations, such as reading from and writing to a database or file system.  It provides an abstraction layer that allows the Service Module to interact with data without needing to know the underlying storage details.
-
-\section class_relationships Class Relationships
-
-- **admin Class**: Handles operations related to managing faculty/batch/schedule by admin.
-
-- **faculty Class**: Handles operations related to schedule by faculty.
+The `CLI Layer` drives the services.  The Service layer then uses the `Model Layer` and `Gemini AI` to carry out tasks.  This design promotes modularity and separation of concerns.
 */
 ```

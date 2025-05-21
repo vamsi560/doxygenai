@@ -6,5 +6,5 @@ var searchData=
   ['generate_5fmarkdown_3',['generate_markdown',['../namespacegenerate__docs.html#af894017ccd1a4d3cee075926517a4396',1,'generate_docs']]],
   ['generatereport_4',['generateReport',['../classadmin.html#a1a0b8b18e142218f796a2b159ef2cae1',1,'admin']]],
   ['github_5fsha_5',['GITHUB_SHA',['../namespacegenerate__docs.html#ae07c3eafb250ff9d8e13710366decee2',1,'generate_docs']]],
-  ['graph_20legend_6',['Graph Legend',['../index.html#graph_legend',1,'']]]
+  ['graph_20explanation_6',['Graph Explanation',['../index.html#graph_explanation',1,'']]]
 ];

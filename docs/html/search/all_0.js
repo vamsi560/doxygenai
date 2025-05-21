@@ -6,10 +6,7 @@ var searchData=
   ['adminlogin_2eh_3',['adminLogin.h',['../admin_login_8h.html',1,'']]],
   ['adminmodules_4',['adminModules',['../classadmin.html#a12a71ee0e0641ca0a2274aa5abc52d1d',1,'admin']]],
   ['allottrainer_5',['allotTrainer',['../classadmin.html#acadde72ad66790d2eea1c908c67ff579',1,'admin']]],
-  ['analysis_20of_20the_20architecture_6',['Analysis of the Architecture',['../index.html#arch_analysis',1,'']]],
-  ['and_20class_20dependencies_7',['Module and Class Dependencies',['../index.html#dependencies',1,'']]],
-  ['api_5fkey_8',['api_key',['../namespacegenerate__docs.html#ac02e96c8f3b51d31c8854069d4d49e49',1,'generate_docs']]],
-  ['architecture_9',['Analysis of the Architecture',['../index.html#arch_analysis',1,'']]],
-  ['architecture_20diagram_10',['Architecture Diagram',['../index.html#arch_diagram',1,'']]],
-  ['autodocs_20documentation_11',['AutoDocs Documentation',['../index.html',1,'']]]
+  ['api_5fkey_6',['api_key',['../namespacegenerate__docs.html#ac02e96c8f3b51d31c8854069d4d49e49',1,'generate_docs']]],
+  ['architecture_20overview_7',['Architecture Overview',['../index.html#architecture',1,'']]],
+  ['autodocs_20project_8',['AutoDocs Project',['../index.html',1,'']]]
 ];

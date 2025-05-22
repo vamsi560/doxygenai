@@ -1,10 +1,10 @@
 
         PROJECT_NAME = "UploadedProject"
-        OUTPUT_DIRECTORY = "C:\Users\AZUREU~1\AppData\Local\Temp\2\tmpdvhec0z6/docs"
+        OUTPUT_DIRECTORY = "C:\Users\AZUREU~1\AppData\Local\Temp\2\tmpk7x21wzq/docs"
         GENERATE_HTML = YES
         GENERATE_LATEX = NO
         RECURSIVE = YES
-        INPUT = "C:\Users\AZUREU~1\AppData\Local\Temp\2\tmpdvhec0z6"
+        INPUT = "C:\Users\AZUREU~1\AppData\Local\Temp\2\tmpk7x21wzq"
         EXTRACT_ALL = YES
         HAVE_DOT = YES
         CALL_GRAPH = YES

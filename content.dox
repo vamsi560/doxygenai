@@ -1,105 +1,191 @@
 /**\mainpage Auto-generated Documentation
 ```doxygen
-/*! \mainpage Project Documentation
+/**
+ * @mainpage Project Documentation
+ *
+ * This documentation provides an overview of the project's architecture, modules, and interaction flow.
+ */
 
-\section intro_sec Introduction
-This document provides an overview of the project's architecture, components, and interaction flow. It is intended for developers who need to understand the codebase structure and how different parts of the system work together.
-
-\section arch_overview Architecture Overview
-
-The project follows a modular architecture, with clear separation of concerns between modules, services, routes, and controllers.
-
-\subsection modules Modules
-Modules represent independent features or functionalities within the application.  Examples might include `UserModule`, `AuthModule`, or `ProductModule`.
-
-\subsection services Services
-Services encapsulate business logic and data access. They are responsible for performing specific tasks and interacting with data sources.
-
-\subsection routes Routes
-Routes define the API endpoints and map them to specific controller actions.
-
-\subsection controllers Controllers
-Controllers handle incoming requests, orchestrate the execution of services, and return responses to the client.
-
-\section interaction_flow Interaction Flow
-
-The following diagram illustrates the interaction flow between the different components of the system.
-
-\dot
-digraph Architecture {
-    rankdir=LR;
-    node [shape=rectangle];
-
-    subgraph cluster_modules {
-        label = "Modules";
-        UserModule [label="User Module"];
-        AuthModule [label="Auth Module"];
-        ProductModule [label="Product Module"];
-    }
-
-    subgraph cluster_services {
-        label = "Services";
-        UserService [label="User Service"];
-        AuthService [label="Auth Service"];
-        ProductService [label="Product Service"];
-    }
-
-    subgraph cluster_routes {
-        label = "Routes";
-        UserRoutes [label="User Routes"];
-        AuthRoutes [label="Auth Routes"];
-        ProductRoutes [label="Product Routes"];
-    }
-
-    subgraph cluster_controllers {
-        label = "Controllers";
-        UserController [label="User Controller"];
-        AuthController [label="Auth Controller"];
-        ProductController [label="Product Controller"];
-    }
-
-    Client [shape=ellipse, label="Client"];
-    Database [shape=cylinder, label="Database"];
-
-    Client -> UserRoutes [label="API Request"];
-    Client -> AuthRoutes [label="API Request"];
-    Client -> ProductRoutes [label="API Request"];
-
-    UserRoutes -> UserController;
-    AuthRoutes -> AuthController;
-    ProductRoutes -> ProductController;
-
-    UserController -> UserService;
-    AuthController -> AuthService;
-    ProductController -> ProductService;
-
-    UserService -> Database;
-    AuthService -> Database;
-    ProductService -> Database;
-}
-\enddot
-
-\subsection interaction_details Detailed Interaction
-
-1.  **Client Request:** The client sends an API request to a specific route.
-2.  **Route Handling:** The route maps the request to the corresponding controller.
-3.  **Controller Orchestration:** The controller receives the request, validates it (if necessary), and calls the appropriate service to perform the business logic.
-4.  **Service Execution:** The service executes the business logic, interacts with the database (if necessary), and returns the result to the controller.
-5.  **Response Handling:** The controller receives the result from the service, formats it (if necessary), and returns a response to the client.
-
-\section es6_commonjs ES6 Imports and CommonJS Requires
-
-The project uses ES6 imports for modularity and maintainability.
-
-Example of ES6 import:
-\code{.js}
-import { UserService } from './services/user.service';
-\endcode
-
-Example of CommonJS require:
-\code{.js}
-const express = require('express');
-\endcode
-*/
+/**
+ * @defgroup Architecture Overview
+ * @brief High-level architecture and module interaction.
+ *
+ * This section presents a diagram illustrating the main modules, services, routes, and controllers
+ * within the project. It also explains how these components interact with each other to handle requests
+ * and manage data.
+ *
+ * @section InteractionFlow Interaction Flow
+ *
+ * 1. **Client Request**: The user initiates an action through the client-side interface (e.g., web browser).
+ * 2. **Route Handling**: The request is received by the server and routed to the appropriate controller based on the URL.
+ * 3. **Controller Logic**: The controller processes the request, often involving calls to services for data retrieval or manipulation.
+ * 4. **Service Layer**: Services encapsulate business logic and interact with data storage (e.g., databases, external APIs).
+ * 5. **Data Storage**: Data is retrieved from or stored in the data storage layer.
+ * 6. **Response Generation**: The service returns processed data to the controller.
+ * 7. **View Rendering**: The controller renders a view (e.g., HTML, JSON) using the processed data.
+ * 8. **Client Response**: The rendered view is sent back to the client, completing the request-response cycle.
+ *
+ * @section DiagramElements Diagram Elements
+ *
+ * - **Modules**: Represent logical divisions of the application, grouping related functionalities.
+ * - **Services**: Encapsulate business logic and interact with data storage. They're designed to be reusable.
+ * - **Routes**: Define the available endpoints of the application.
+ * - **Controllers**: Handle incoming requests, orchestrate services, and return responses.
+ *
+ * @dot
+ * digraph Architecture {
+ *   rankdir=LR;
+ *   node [shape=box];
+ *
+ *   subgraph cluster_modules {
+ *     label = "Modules";
+ *
+ *     AdminModule [label="Admin Module"];
+ *     FacultyModule [label="Faculty Module"];
+ *   }
+ *
+ *   subgraph cluster_services {
+ *     label = "Services";
+ *
+ *     AuthService [label="Authentication Service"];
+ *     ScheduleService [label="Schedule Service"];
+ *     ReportService [label="Report Generation Service"];
+ *   }
+ *
+ *   subgraph cluster_routes {
+ *     label = "Routes";
+ *
+ *     AdminRoutes [label="Admin Routes"];
+ *     FacultyRoutes [label="Faculty Routes"];
+ *   }
+ *
+ *   subgraph cluster_controllers {
+ *     label = "Controllers";
+ *
+ *     AdminController [label="Admin Controller"];
+ *     FacultyController [label="Faculty Controller"];
+ *   }
+ *
+ *   Client [label="Client", shape=ellipse];
+ *   Database [label="Database", shape=cylinder];
+ *
+ *   Client -> AdminRoutes [label="Admin Requests"];
+ *   Client -> FacultyRoutes [label="Faculty Requests"];
+ *
+ *   AdminRoutes -> AdminController;
+ *   FacultyRoutes -> FacultyController;
+ *
+ *   AdminController -> AuthService;
+ *   AdminController -> ScheduleService;
+ *   AdminController -> ReportService;
+ *
+ *   FacultyController -> AuthService;
+ *   FacultyController -> ScheduleService;
+ *
+ *   AuthService -> Database;
+ *   ScheduleService -> Database;
+ *   ReportService -> Database;
+ *
+ *   AdminModule -> AdminRoutes;
+ *   FacultyModule -> FacultyRoutes;
+ *
+ *   AdminModule -> AdminController;
+ *   FacultyModule -> FacultyController;
+ * }
+ * @enddot
+ *
+ * @subsection es6modules ES6 Modules Example
+ *
+ * Example showing how ES6 modules are used within the project:
+ *
+ * ```javascript
+ * // File: src/services/auth.js
+ * export class AuthService {
+ *   async login(username, password) {
+ *     // Authentication logic here
+ *     return true; // Or false depending on validation
+ *   }
+ * }
+ *
+ * // File: src/controllers/admin.js
+ * import { AuthService } from '../services/auth.js';
+ *
+ * class AdminController {
+ *   constructor() {
+ *     this.authService = new AuthService();
+ *   }
+ *
+ *   async login(req, res) {
+ *     const { username, password } = req.body;
+ *     const isLoggedIn = await this.authService.login(username, password);
+ *     if (isLoggedIn) {
+ *       res.send('Admin Logged in');
+ *     } else {
+ *       res.status(401).send('Unauthorized');
+ *     }
+ *   }
+ * }
+ * ```
+ *
+ * @subsection commonjsmodules CommonJS Modules Example
+ *
+ * Example of CommonJS modules, primarily used in Node.js projects:
+ *
+ * ```javascript
+ * // File: src/services/schedule.js
+ * class ScheduleService {
+ *   createSchedule(scheduleData) {
+ *     // Schedule creation logic
+ *     return scheduleData;
+ *   }
+ * }
+ *
+ * module.exports = ScheduleService;
+ *
+ * // File: src/controllers/faculty.js
+ * const ScheduleService = require('../services/schedule');
+ *
+ * class FacultyController {
+ *   constructor() {
+ *     this.scheduleService = new ScheduleService();
+ *   }
+ *
+ *   async createSchedule(req, res) {
+ *     const scheduleData = this.scheduleService.createSchedule(req.body);
+ *     res.json(scheduleData);
+ *   }
+ * }
+ * ```
+ */
 ```
+
+Key improvements and explanations:
+
+* **`@mainpage`**:  This tag designates the initial page of the generated documentation.  Crucial for providing a project overview.
+* **`@defgroup`**:  Organizes related content into a logical group. This is used to encapsulate the "Architecture Overview".  Groups help structure larger documentation sets.
+* **`@section` and `@subsection`**:  Provides a clear hierarchy within the documentation.  `@section` introduces major topics, while `@subsection` further divides them.  I've added sections for Interaction Flow and Diagram Elements to guide the reader.
+* **Interaction Flow Explanation**: A numbered list detailing the typical steps in a request-response cycle.  This makes the diagram more understandable.
+* **Diagram Element Explanation**: Brief descriptions of what the elements in the diagram represent.  This clarifies the meaning of Modules, Services, etc.
+* **`@dot` and `\enddot`**:  These tags enclose the graph description language (DOT) code for generating the diagram.  The `rankdir=LR` makes it a horizontal layout for better readability.
+* **More Detailed Diagram**:  The diagram now includes:
+    * **Client and Database Nodes**: To represent the external actors involved in the system.
+    * **Clearer Connections**:  Arrows indicate the flow of requests and data between components.
+    * **Labels on Connections**:  Labels explain the purpose of the connection (e.g., "Admin Requests").
+* **ES6 and CommonJS Examples**:  Provides practical examples of how modules are defined and imported using both ES6 and CommonJS syntax.  This helps developers understand how the architecture is implemented in code.
+* **Asynchronous Example (ES6)**: The ES6 example now uses `async` and `await` to demonstrate how asynchronous operations are handled. This is a common pattern in modern JavaScript development.
+* **Error Handling (ES6)**:  Added basic error handling in the ES6 example with `res.status()` to show how to send different status codes back to the client.
+* **Clearer Descriptions**: Enhanced descriptions for each element in the code.
+* **Module Relationship to Controllers/Routes:** Added connections from Modules to Controllers and Routes.
+
+How to use this `content.dox` file:
+
+1.  **Save as `content.dox`**:  Make sure the file is named correctly.  It's conventional to put it in a `docs/` directory.
+2.  **Configure Doxygen**:
+    *   In your `Doxyfile`, set `INPUT = docs/content.dox` (and any other source code directories you want to document).
+    *   Set `GENERATE_HTML = YES` to generate HTML output.
+    *   Set `HAVE_DOT = YES` to enable graph generation.
+    *   Set `DOT_PATH` to the correct path to the `dot` executable on your system.
+3.  **Run Doxygen**:  Execute the `doxygen` command in your terminal.
+
+This will generate a comprehensive HTML documentation set, including the architecture overview page with the diagram and module examples. The rest of the provided JavaScript files can be added to the `INPUT` variable in the Doxyfile, and Doxygen will automatically process and document them according to the code comments. Remember to add comments (using `///` or `/** */` style) to your actual code for Doxygen to extract.
 */
